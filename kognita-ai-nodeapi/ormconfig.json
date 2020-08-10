@@ -1,0 +1,21 @@
+{
+   "name": "default",
+   "type": "mysql",
+   "host": "localhost",
+   "port": 3306,
+   "username": "root",
+   "password": "password",
+   "database": "kognita",
+   "synchronize": true,
+   "logging": false,
+   "entities": [
+      "src/entities/*.ts"
+   ],
+   "migrations": [
+      "src/migrations/*.ts"
+   ],
+   "cli": {
+      "entitiesDir": "src/entities",
+      "migrationsDir": "src/migrations"
+   }
+}
