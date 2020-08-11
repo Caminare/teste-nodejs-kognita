@@ -10,12 +10,12 @@ Steps to run this project:
 # API Documentation
 All responses come in standard JSON. All requests must include a content-type of application/json and the body must be valid JSON.
 
-## Auth
+# Auth
 
-# Login
+## Login
 
 **You send:**  Your  login credentials.
-**You get:** An `API-Token` with wich you can make further actions.
+**You get:** An `token` with wich you can make requests.
 
 **Request:**
 ```json
@@ -24,8 +24,8 @@ Accept: application/json
 Content-Type: application/json
 
 {
-	"email": "gxvitor.1997@hotmail.com",
-	"password": "12345678"
+   "email": "gxvitor.1997@hotmail.com",
+   "password": "12345678"
 }
 ```
 **Successful Response:**
