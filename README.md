@@ -17,7 +17,7 @@ Api to register a user and generate a token to make requests to other API's.
 ## Login
 
 **You send:**  Your  login credentials.
-**You get:** An `token` with wich you can make requests.
+**You get:** An `token` with which you can make requests.
 
 **Request:**
 ```json
@@ -55,7 +55,7 @@ Content-Type: application/json
 ## Register
 
 **You send:**  Your user data.
-**You get:** An `token` with wich you can make requests.
+**You get:** An `token` with which you can make requests.
 
 **Request:**
 ```json
