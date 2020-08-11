@@ -78,7 +78,21 @@ Content-Type: application/json
   "success": true
 }
 ```
+
 **Failed Response:**
+```json
+HTTP 400 Bad Request
+Content-Type: application/json
+
+{
+  "error": {
+    "message": ""
+  },
+  "success": false
+}
+``` 
+
+**Failed Response when E-mail is already registered:**
 ```json
 HTTP 400 Bad Request
 Content-Type: application/json
@@ -97,7 +111,7 @@ Content-Type: application/json
 API to perform CRUD operations on a person/persons, all requests must have a authorization bearer with a valid token.
 
 ```json
-Person Json Object
+Person JSON Object
 
 {
   "id": 0,
@@ -145,6 +159,19 @@ Content-Type: application/json
     "success": true
 }
 ```
+**Failed Response:**
+```json
+HTTP 400 Bad Request
+Content-Type: application/json
+
+{
+  "error": {
+    "message": ""
+  },
+  "success": false
+}
+``` 
+
 **Failed Response in Case of Invalid CNPJ:**
 ```json
 HTTP 400 Bad Request
@@ -243,6 +270,20 @@ Content-Type: application/json
     "success": true
 }
 ```
+
+**Failed Response:**
+```json
+HTTP 400 Bad Request
+Content-Type: application/json
+
+{
+  "error": {
+    "message": ""
+  },
+  "success": false
+}
+``` 
+
 **Failed Response in Case of Invalid CNPJ:**
 ```json
 HTTP 400 Bad Request
@@ -269,3 +310,400 @@ Content-Type: application/json
 }
 ``` 
 
+/* find */
+
+## Find
+
+### Find one
+**You send:**  An id
+**You get:** The person object with a success.
+
+**Request:**
+```json
+POST /person/find/1
+Accept: application/json
+Content-Type: application/json
+
+```
+**Successful Response:**
+```json
+HTTP 200 OK
+Content-Type: application/json
+{
+    "person": {
+        "createdAt": "2020-08-11T15:16:17.596Z",
+        "updatedAt": "2020-08-11T15:16:17.596Z",
+        "id": "1",
+        "companyName": "Gabriel Vitor",
+        "fantasyName": "Caminare",
+        "CNPJ": "09.746.104/0001-14",
+        "openDate": "1997-10-24T00:00:00.000Z"
+    },
+    "success": true
+}
+```
+**Failed Response**
+```json
+HTTP 400 Bad Request
+Content-Type: application/json
+
+{
+  "error": {
+      "message": ""
+  },
+  "success": false
+}
+
+``` 
+
+### Find many
+
+**You send:** Optional query parameters page and quantityPerPage
+**You get:** An array of persons objects
+
+
+**Request:**
+```json
+POST /person/find-many?page=1&quantityPerPage=3
+Accept: application/json
+Content-Type: application/json
+
+```
+**Successful Response:**
+```json
+HTTP 200 OK
+Content-Type: application/json
+{
+  "persons": [
+      {
+          "createdAt": "2020-08-11T15:16:17.596Z",
+          "updatedAt": "2020-08-11T15:16:17.596Z",
+          "id": "1",
+          "companyName": "Gabriel Vitor",
+          "fantasyName": "Caminare",
+          "CNPJ": "09.746.104/0001-14",
+          "openDate": "1997-10-24T00:00:00.000Z"
+      },
+      {
+          "createdAt": "2020-08-11T15:18:38.644Z",
+          "updatedAt": "2020-08-11T15:18:38.644Z",
+          "id": "2",
+          "companyName": "Gabriel Vitor",
+          "fantasyName": "Caminare",
+          "CNPJ": "09.746.104/0001-14",
+          "openDate": "1997-10-24T00:00:00.000Z"
+      },
+      {
+          "createdAt": "2020-08-11T15:18:38.663Z",
+          "updatedAt": "2020-08-11T15:18:38.663Z",
+          "id": "3",
+          "companyName": "Gabriel Vitor 2",
+          "fantasyName": "Caminare 2",
+          "CNPJ": "09.746.104/0001-14",
+          "openDate": "1997-10-24T00:00:00.000Z"
+      }
+  ],
+  "success": true
+}
+```
+**Failed Response:**
+```json
+HTTP 400 Bad Request
+Content-Type: application/json
+
+{
+    "error": {
+        "message": ""
+    },
+    "success": false
+}
+``` 
+
+/* Delete */
+
+## Delete
+
+### Delete one
+**You send:**  An id
+**You get:** An success message.
+
+**Request:**
+```json
+POST /person/delete/1
+Accept: application/json
+Content-Type: application/json
+
+```
+**Successful Response:**
+```json
+HTTP 200 OK
+Content-Type: application/json
+{
+    "message": "The user was succesfully deleted",
+    "success": true
+}
+```
+**Failed Response**
+```json
+HTTP 400 Bad Request
+Content-Type: application/json
+
+{
+  "error": {
+      "message": ""
+  },
+  "success": false
+}
+
+``` 
+
+### Delete many
+
+**You send:** An array of ids
+**You get:** A success message.
+
+
+**Request:**
+```json
+POST /person/delete-many
+Accept: application/json
+Content-Type: application/json
+
+{
+    "ids": [1,2,3]
+}
+
+```
+**Successful Response:**
+```json
+HTTP 200 OK
+Content-Type: application/json
+{
+    "message": "The users were succesfully deleted",
+    "success": true
+}
+```
+**Failed Response:**
+```json
+HTTP 400 Bad Request
+Content-Type: application/json
+
+{
+    "error": {
+        "message": ""
+    },
+    "success": false
+}
+``` 
+
+
+/* Update */
+
+## Update
+
+### Update one
+**You send:**  An json person object
+**You get:** The object with a success.
+
+**Request:**
+```json
+POST /person/update
+Accept: application/json
+Content-Type: application/json
+
+{
+    "createdAt": "2020-08-10T21:07:38.730Z",
+    "updatedAt": "2020-08-10T21:07:38.730Z",
+    "id": "5",
+    "companyName": "gxvitor5.1997@hotmail.com",
+    "fantasyName": "",
+    "CNPJ": "56.903.156/0001-37",
+    "openDate": "1997-10-25T00:00:00.000Z"
+}
+
+```
+**Successful Response:**
+```json
+HTTP 200 OK
+Content-Type: application/json
+{
+    "person": {
+        "createdAt": "2020-08-10T21:07:38.730Z",
+        "updatedAt": "2020-08-10T21:07:38.730Z",
+        "id": "5",
+        "companyName": "gxvitor5.1997@hotmail.com",
+        "fantasyName": "",
+        "CNPJ": "56.903.156/0001-37",
+        "openDate": "1997-10-25T00:00:00.000Z"
+    },
+    "success": true
+}
+```
+**Failed Response**
+```json
+HTTP 400 Bad Request
+Content-Type: application/json
+
+{
+  "error": {
+      "message": ""
+  },
+  "success": false
+}
+
+``` 
+
+**Failed Response when invalid CNPJ:**
+```json
+HTTP 400 Bad Request
+Content-Type: application/json
+
+{
+  "error": [
+      {
+          "target": {
+              "createdAt": "2020-08-11T15:18:38.663Z",
+              "updatedAt": "2020-08-11T15:18:38.663Z",
+              "id": "3",
+              "companyName": "Gabriel Vitor 2",
+              "fantasyName": "Caminare 2",
+              "CNPJ": "111111",
+              "openDate": "1997-10-24T00:00:00.000Z"
+          },
+          "value": "111111",
+          "property": "CNPJ",
+          "children": [],
+          "constraints": {
+              "validCNPJ": "Must be a valid CNPJ",
+              "minLength": "CNPJ must be longer than or equal to 14 characters"
+          }
+      }
+  ],
+  "success": false
+}
+``` 
+
+### Delete many
+
+**You send:**  An array of persons object
+**You get:** The objects with a success.
+
+
+**Request:**
+```json
+POST /person/update-many
+Accept: application/json
+Content-Type: application/json
+
+{
+    "persons": [
+        {
+            "createdAt": "2020-08-11T15:18:38.663Z",
+            "updatedAt": "2020-08-11T15:18:38.663Z",
+            "id": "3",
+            "companyName": "Gabriel Vitor 2",
+            "fantasyName": "Caminare 2",
+            "CNPJ": "09.746.104/0001-14",
+            "openDate": "1997-10-24T00:00:00.000Z"
+        },
+        {
+            "createdAt": "2020-08-10T21:07:38.730Z",
+            "updatedAt": "2020-08-10T21:07:38.730Z",
+            "id": "5",
+            "companyName": "gxvitor5.1997@hotmail.com",
+            "fantasyName": "",
+            "CNPJ": "56.903.156/0001-37",
+            "openDate": "1997-10-25T00:00:00.000Z"
+        },
+        {
+            "createdAt": "2020-08-11T15:20:25.197Z",
+            "updatedAt": "2020-08-11T15:20:25.197Z",
+            "id": "6",
+            "companyName": "Gabriel Vitor 2",
+            "fantasyName": "Caminare 2",
+            "CNPJ": "09.746.104/0001-14",
+            "openDate": "1997-10-24T00:00:00.000Z"
+        }
+    ],
+    "success": true
+}
+```
+**Successful Response:**
+```json
+HTTP 200 OK
+Content-Type: application/json
+{
+    "persons": [
+        {
+            "createdAt": "2020-08-11T15:18:38.663Z",
+            "updatedAt": "2020-08-11T15:18:38.663Z",
+            "id": "3",
+            "companyName": "Gabriel Vitor 2",
+            "fantasyName": "Caminare 2",
+            "CNPJ": "09.746.104/0001-14",
+            "openDate": "1997-10-24T00:00:00.000Z"
+        },
+        {
+            "createdAt": "2020-08-10T21:07:38.730Z",
+            "updatedAt": "2020-08-10T21:07:38.730Z",
+            "id": "5",
+            "companyName": "gxvitor5.1997@hotmail.com",
+            "fantasyName": "",
+            "CNPJ": "56.903.156/0001-37",
+            "openDate": "1997-10-25T00:00:00.000Z"
+        },
+        {
+            "createdAt": "2020-08-11T15:20:25.197Z",
+            "updatedAt": "2020-08-11T15:20:25.197Z",
+            "id": "6",
+            "companyName": "Gabriel Vitor 2",
+            "fantasyName": "Caminare 2",
+            "CNPJ": "09.746.104/0001-14",
+            "openDate": "1997-10-24T00:00:00.000Z"
+        }
+    ],
+    "success": true
+}
+```
+**Failed Response:**
+```json
+HTTP 400 Bad Request
+Content-Type: application/json
+
+{
+    "error": {
+        "message": ""
+    },
+    "success": false
+}
+``` 
+
+**Failed Response when invalid CNPJ:**
+```json
+HTTP 400 Bad Request
+Content-Type: application/json
+
+{
+  "error": [
+      {
+          "target": {
+              "createdAt": "2020-08-11T15:18:38.663Z",
+              "updatedAt": "2020-08-11T15:18:38.663Z",
+              "id": "3",
+              "companyName": "Gabriel Vitor 2",
+              "fantasyName": "Caminare 2",
+              "CNPJ": "1111111",
+              "openDate": "1997-10-24T00:00:00.000Z"
+          },
+          "value": "1111111",
+          "property": "CNPJ",
+          "children": [],
+          "constraints": {
+              "validCNPJ": "Must be a valid CNPJ",
+              "minLength": "CNPJ must be longer than or equal to 14 characters"
+          }
+      }
+  ],
+  "success": false
+}
+``` 

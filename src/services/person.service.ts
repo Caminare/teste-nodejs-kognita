@@ -47,7 +47,10 @@ const deleteMany = async (ids: number[]) => {
 
 const updateOne = async (updatedPerson: Person) => {
     const personRepository = getManager().getRepository(Person);
-    return await personRepository.save(updatedPerson);
+
+    let personToUpdate = personRepository.create(updatedPerson);
+
+    return await personRepository.save(personToUpdate);
 };
 
 const updateMany = async (updatedPersons: Person[]) => {

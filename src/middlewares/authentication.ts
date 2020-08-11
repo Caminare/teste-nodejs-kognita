@@ -4,7 +4,7 @@ import config from '../config/config';
 
 export default (req: Request, res: Response, next: NextFunction) => {
   if (req.originalUrl.indexOf('auth') === -1) {
-    const token = <string>req.headers.authorization.replace('Bearer ', '');
+    const token = req.headers.authorization ? <string>req.headers.authorization.replace('Bearer ', '') : '';
     let jwtPayload;
 
     try {
