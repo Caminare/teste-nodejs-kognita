@@ -4,9 +4,9 @@ import config from '../config/config';
 
 export default (req: Request, res: Response, next: NextFunction) => {
   if (req.originalUrl.indexOf('auth') === -1) {
-    const token = <string>req.headers['auth'];
+    const token = <string>req.headers.authorization.replace('Bearer ', '');
     let jwtPayload;
-    
+
     try {
       jwtPayload = <any>jwt.verify(token, config.secret);
       res.locals.jwtPayload = jwtPayload;
@@ -14,12 +14,12 @@ export default (req: Request, res: Response, next: NextFunction) => {
       res.status(401).send();
       return;
     }
-  
+
     const { userId, username } = jwtPayload;
     const newToken = jwt.sign({ userId, username }, config.secret, {
       expiresIn: '1h'
     });
-  
+
     res.setHeader('token', newToken);
   }
 

@@ -1,9 +1,7 @@
 import { getManager } from 'typeorm';
-import { User } from '../entities/User';
-import { generateHash, validateHash } from '../utilities/encryptUtils';
 import { People } from '../entities/People';
 
-const createPeople = async(companyName: string, fantasyName: string = '', CNPJ:string, openDate: Date) => {
+const createPeople = async (companyName: string, fantasyName: string = '', CNPJ: string, openDate: Date) => {
     const peopleRepository = getManager().getRepository(People);
     const newPeople = new People();
 
@@ -15,17 +13,17 @@ const createPeople = async(companyName: string, fantasyName: string = '', CNPJ:s
     return await peopleRepository.save(newPeople);
 };
 
-const createMany = async(persons: People[]) => {
+const createMany = async (persons: People[]) => {
     const peopleRepository = getManager().getRepository(People);
     return await peopleRepository.save(persons);
 };
 
-const findById = async(id: number) => {
+const findById = async (id: number) => {
     const peopleRepository = getManager().getRepository(People);
     return await peopleRepository.findOne({ id });
 };
 
-const findMany = async(page: number, quantityPerPage: number) => {
+const findMany = async (page: number, quantityPerPage: number) => {
     const peopleRepository = getManager().getRepository(People);
     return await peopleRepository
         .createQueryBuilder('person')
@@ -34,22 +32,22 @@ const findMany = async(page: number, quantityPerPage: number) => {
         .getMany();
 };
 
-const deleteOne = async(id: number) => {
+const deleteOne = async (id: number) => {
     const peopleRepository = getManager().getRepository(People);
     return await peopleRepository.delete({ id });
 };
 
-const deleteMany = async(ids: number[]) => {
+const deleteMany = async (ids: number[]) => {
     const peopleRepository = getManager().getRepository(People);
     return await peopleRepository.delete(ids);
 };
 
-const updateOne = async(updatedPeople: People) => {
+const updateOne = async (updatedPeople: People) => {
     const peopleRepository = getManager().getRepository(People);
     return await peopleRepository.save(updatedPeople);
 };
 
-const updateMany = async(updatedPeoples: People[]) => {
+const updateMany = async (updatedPeoples: People[]) => {
     const peopleRepository = getManager().getRepository(People);
     return await peopleRepository.save(updatedPeoples);
 };
