@@ -1,71 +1,66 @@
 import IController from '../interfaces/IController';
-import peopleService from '../services/people.service';
-import { Any } from 'typeorm';
+import personService from '../services/person.service';
 
-const create: IController = async(req, res) => {
-    let people;
+const create: IController = async (req, res) => {
+    let person;
     try {
-        people = await peopleService.createPeople(req.body.companyName, req.body.fantasyName, req.body.CNPJ, req.body.openDate);
+        person = await personService.createPerson(req.body.companyName, req.body.fantasyName, req.body.CNPJ, req.body.openDate);
     } catch (error) {
         res.status(400);
         res.json({
-            error: {
-                message: error.message
-            },
+            error,
             success: false
         });
 
         return;
     };
 
-    if (people) {
+    if (person) {
         res.status(200);
-        res.json({ people, success: true });
+        res.json({ person, success: true });
     } else {
         res.status(400);
         res.json({
             error: {
-                message:'An error ocurred while attempting to create a person.'
+                message: 'An error ocurred while attempting to create a person.'
             },
             success: false
         });
     };
 };
 
-const createMany: IController = async(req, res) => {
-    let peoples;
+const createMany: IController = async (req, res) => {
+    let persons;
     try {
-        peoples = await peopleService.createMany(req.body.persons);
+        persons = await personService.createMany(req.body.persons);
     } catch (error) {
         res.status(400);
         res.json({
-            error: {
-                message: error.message
-            },
+            error,
             success: false
         });
 
         return;
     };
 
-    if (peoples) {
+    if (persons) {
         res.status(200);
-        res.json({ peoples, success: true });
+        res.json({ persons, success: true });
     } else {
         res.status(400);
         res.json({
             error: {
-                message:'An error ocurred while attempting to create a person.'
+                message: 'An error ocurred while attempting to create a person.'
             },
             success: false
         });
     };
 };
 
-const findOne: IController = async(req, res) => {
-    let people = {};
+const findOne: IController = async (req, res) => {
+    let person = {};
     try {
-        people = await peopleService.findById(parseInt(req.params.id));
+        person = await personService.findById(parseInt(req.params.id));
     } catch (error) {
         res.status(400);
         res.json({
@@ -78,15 +73,15 @@ const findOne: IController = async(req, res) => {
     };
 
     res.status(200);
-    res.json({ people, success: true });
+    res.json({ person, success: true });
 };
 
-const findMany: IController = async(req, res) => {
-    let peoples = [];
+const findMany: IController = async (req, res) => {
+    let persons = [];
     let page = <string>req.query.page || '1';
     let quantityPerPage = <string>req.query.quantityPerPage || '10';
     try {
-        peoples = await peopleService.findMany(parseInt(page), parseInt(quantityPerPage));
+        persons = await personService.findMany(parseInt(page), parseInt(quantityPerPage));
     } catch (error) {
         res.status(400);
         res.json({
@@ -99,18 +94,16 @@ const findMany: IController = async(req, res) => {
     };
 
     res.status(200);
-    res.json({ peoples, success: true });
+    res.json({ persons, success: true });
 };
 
-const deleteOne: IController = async(req, res) => {
+const deleteOne: IController = async (req, res) => {
     try {
-        await peopleService.deleteOne(parseInt(req.params.id));
+        await personService.deleteOne(parseInt(req.params.id));
     } catch (error) {
         res.status(400);
         res.json({
-            error: {
-                message: error.message
-            },
+            error,
             success: false
         });
 
@@ -121,15 +114,13 @@ const deleteOne: IController = async(req, res) => {
 };
 
 
-const deleteMany: IController = async(req, res) => {
+const deleteMany: IController = async (req, res) => {
     try {
-        await peopleService.deleteMany(req.body.ids);
+        await personService.deleteMany(req.body.ids);
     } catch (error) {
         res.status(400);
         res.json({
-            error: {
-                message: error.message
-            },
+            error,
             success: false
         });
 
@@ -139,42 +130,38 @@ const deleteMany: IController = async(req, res) => {
     res.json({ message: 'The users were succesfully deleted', success: true });
 };
 
-const updateOne: IController = async(req, res) => {
-    let people;
+const updateOne: IController = async (req, res) => {
+    let person;
     try {
-        people = await peopleService.updateOne(req.body);
+        person = await personService.updateOne(req.body);
     } catch (error) {
         res.status(400);
         res.json({
-            error: {
-                message: error.message
-            },
+            error,
             success: false
         });
 
     };
 
     res.status(200);
-    res.json({ people, success: true });
+    res.json({ person, success: true });
 };
 
-const updateMany: IController = async(req, res) => {
-    let peoples = [];
+const updateMany: IController = async (req, res) => {
+    let persons = [];
     try {
-        peoples = await peopleService.updateMany(req.body.peoples);
+        persons = await personService.updateMany(req.body.persons);
     } catch (error) {
         res.status(400);
         res.json({
-            error: {
-                message: error.message
-            },
+            error,
             success: false
         });
 
     };
 
     res.status(200);
-    res.json({ peoples, success: true });
+    res.json({ persons, success: true });
 };
 
 export default {
