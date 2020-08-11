@@ -576,7 +576,7 @@ Content-Type: application/json
 }
 ``` 
 
-### Delete many
+### Update many
 
 **You send:**  An array of persons object
 **You get:** The objects with a success.
