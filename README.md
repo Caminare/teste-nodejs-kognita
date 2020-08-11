@@ -310,8 +310,6 @@ Content-Type: application/json
 }
 ``` 
 
-/* find */
-
 ## Find
 
 ### Find one
@@ -419,8 +417,6 @@ Content-Type: application/json
 }
 ``` 
 
-/* Delete */
-
 ## Delete
 
 ### Delete one
@@ -495,9 +491,6 @@ Content-Type: application/json
     "success": false
 }
 ``` 
-
-
-/* Update */
 
 ## Update
 
