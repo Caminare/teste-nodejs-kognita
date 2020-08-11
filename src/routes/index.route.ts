@@ -1,7 +1,7 @@
 import * as express from 'express';
 
 import auth from './authentication/auth.route';
-import person from './people/people.route';
+import person from './people/person.route';
 
 const router = express.Router();
 
